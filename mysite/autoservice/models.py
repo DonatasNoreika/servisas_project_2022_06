@@ -28,6 +28,9 @@ class Service(models.Model):
     name = models.CharField(verbose_name="Name", max_length=200)
     price = models.FloatField(verbose_name="Price")
 
+    def __str__(self):
+        return f"{self.name}: {self.price}"
+
 
 class Order(models.Model):
     vehicle = models.ForeignKey(to='Vehicle', verbose_name="Vehicle", on_delete=models.SET_NULL, null=True)
