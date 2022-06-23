@@ -4,24 +4,24 @@ from django.db import models
 # Create your models here.
 
 class VehicleModel(models.Model):
-    year = models.IntegerField(verbose_name='Year')
     make = models.CharField(verbose_name='Make', max_length=200)
     model = models.CharField(verbose_name='Model', max_length=200)
-    engine = models.CharField(verbose_name='Engine', max_length=200)
 
     def __str__(self):
-        return f"{self.year}, {self.make} {self.model}, {self.engine}"
+        return f"{self.make} {self.model}"
 
 
 class Vehicle(models.Model):
+    year = models.IntegerField(verbose_name='Year', null=True)
     owner_name = models.CharField(verbose_name='Owner', max_length=200)
     vehicle_model = models.ForeignKey(to='VehicleModel', verbose_name="Vehicle Model", on_delete=models.SET_NULL,
                                       null=True)
     license_plate = models.CharField(verbose_name='License Plate', max_length=200)
     vin_code = models.CharField(verbose_name='VIN code', max_length=20)
+    engine = models.CharField(verbose_name='Engine', max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.owner_name}: {self.vehicle_model}, {self.license_plate}, {self.vin_code}"
+        return f"{self.owner_name}: {self.vehicle_model}, {self.year}, {self.engine}, {self.license_plate}, {self.vin_code}"
 
 
 class Service(models.Model):
@@ -48,6 +48,7 @@ class Order(models.Model):
         default='a',
         help_text='Status',
     )
+
 
 class OrderLine(models.Model):
     order = models.ForeignKey(to="Order", on_delete=models.CASCADE, null=True)
