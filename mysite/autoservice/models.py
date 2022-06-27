@@ -10,6 +10,10 @@ class VehicleModel(models.Model):
     def __str__(self):
         return f"{self.make} {self.model}"
 
+    class Meta:
+        verbose_name = 'Vehicle model'
+        verbose_name_plural = 'Vehicles model'
+
 
 class Vehicle(models.Model):
     year = models.IntegerField(verbose_name='Year', null=True)
@@ -23,6 +27,9 @@ class Vehicle(models.Model):
     def __str__(self):
         return f"{self.owner_name}: {self.vehicle_model}, {self.year}, {self.engine}, {self.license_plate}, {self.vin_code}"
 
+    class Meta:
+        verbose_name = 'Vehicle'
+        verbose_name_plural = 'Vehicles'
 
 class Service(models.Model):
     name = models.CharField(verbose_name="Name", max_length=200)
@@ -30,6 +37,10 @@ class Service(models.Model):
 
     def __str__(self):
         return f"{self.name}: {self.price}"
+
+    class Meta:
+        verbose_name = 'Service'
+        verbose_name_plural = 'Services'
 
 
 class Order(models.Model):
@@ -52,8 +63,16 @@ class Order(models.Model):
         help_text='Status',
     )
 
+    class Meta:
+        verbose_name = 'Order'
+        verbose_name_plural = 'Orders'
+
 
 class OrderLine(models.Model):
     order = models.ForeignKey(to="Order", on_delete=models.CASCADE, null=True)
     service = models.ForeignKey(to="Service", on_delete=models.SET_NULL, null=True)
     qty = models.IntegerField(verbose_name="Quantity")
+
+    class Meta:
+        verbose_name = 'Order line'
+        verbose_name_plural = 'Order lines'
