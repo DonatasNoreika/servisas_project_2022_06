@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Namai{% endblock %}
+
+{% block content %}
+<h1>My Autoservice statistics:</h1>
+<ul>
+    <li><strong>Services:</strong> {{ my_services }}</li>
+    <li><strong>Orders done:</strong> {{ my_orders_done }}</li>
+    <li><strong>Registered Vehicles:</strong> {{ my_vehicles }}</li>
+</ul>
+{% endblock %}
