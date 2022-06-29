@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Vehicles{% endblock %}
+
+{% block content %}
+<h1>Vehicles in Autoservice:</h1>
+{% for vehicle in vehicles %}
+<a href="{% url 'vehicle' vehicle.id %}"><strong>License Plate: </strong> {{ vehicle.license_plate }}</li></a>
+    <strong>Owner: </strong> {{ vehicle.owner_name }}</li>
+    <strong>Model: </strong> {{ vehicle.vehicle_model.make }} {{ vehicle.vehicle_model.model }}</li>
+    <hr/>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Vehicles{% endblock %}
+
+{% block content %}
+<h1>Vehicle:</h1>
+<ul>
+    <li><strong>Year: </strong> {{ vehicle.year }}</li>
+    <li><strong>Owner: </strong> {{ vehicle.owner_name }}</li>
+    <li><strong>Model: </strong> {{ vehicle.make }} {{ vehicle.model }}</li>
+    <li><strong>Owner: </strong> {{ vehicle.owner_name }}</li>
+    <li><strong>License Plate: </strong> {{ vehicle.license_plate }}</li>
+    <li><strong>VIN code: </strong> {{ vehicle.vin_code }}</li>
+    <li><strong>Engine: </strong> {{ vehicle.engine }}</li>
+</ul>
+{% endblock %}
