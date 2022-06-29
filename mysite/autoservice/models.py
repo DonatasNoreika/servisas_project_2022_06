@@ -69,7 +69,7 @@ class Order(models.Model):
 
 
 class OrderLine(models.Model):
-    order = models.ForeignKey(to="Order", on_delete=models.CASCADE, null=True)
+    order = models.ForeignKey(to="Order", on_delete=models.CASCADE, null=True, related_name='lines')
     service = models.ForeignKey(to="Service", on_delete=models.SET_NULL, null=True)
     qty = models.IntegerField(verbose_name="Quantity")
 

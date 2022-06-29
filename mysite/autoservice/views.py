@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import (Service,
                      Order,
                      Vehicle)
+from django.views import generic
 
 
 # Create your views here.
@@ -27,3 +28,15 @@ def vehicles(request):
 def vehicle(request, vehicle_id):
     vehicle = get_object_or_404(Vehicle, pk=vehicle_id)
     return render(request, 'vehicle.html', context={"vehicle": vehicle})
+
+
+class OrderListView(generic.ListView):
+    model = Order
+    context_object_name = 'orders'
+    template_name = 'orders.html'
+
+
+class OrderDetailView(generic.DetailView):
+    model = Order
+    context_object_name = 'order'
+    template_name = 'order.html'

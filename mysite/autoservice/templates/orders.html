@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Orders{% endblock %}
+
+{% block content %}
+<h1>Autoservice Orders:</h1>
+{% for order in orders %}
+<a href="{% url 'order' order.pk %}"><strong>License Plate: </strong> {{ order.vehicle.license_plate }}</li></a>
+    <strong>Deadline: </strong> {{ order.due_date }}</li>
+    <hr/>
+{% endfor %}
+{% endblock %}
