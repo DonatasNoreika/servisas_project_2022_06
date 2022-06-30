@@ -4,6 +4,7 @@ from .models import (Service,
                      Vehicle)
 from django.views import generic
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -31,6 +32,15 @@ def vehicle(request, vehicle_id):
     vehicle = get_object_or_404(Vehicle, pk=vehicle_id)
     return render(request, 'vehicle.html', context={"vehicle": vehicle})
 
+def search(request):
+    query = request.GET.get('query')
+    search_results = Vehicle.objects.filter(Q(year__icontains=query) | Q(owner_name__icontains=query) | Q(vehicle_model__make__icontains=query) | Q(vehicle_model__model__icontains=query) | Q(license_plate__icontains=query) | Q(vin_code__icontains=query) | Q(engine__icontains=query))
+    context = {
+        'vehicles': search_results,
+        'query': query,
+    }
+    return render(request, 'search_results.html', context=context)
+
 
 class OrderListView(generic.ListView):
     model = Order
@@ -42,3 +52,4 @@ class OrderDetailView(generic.DetailView):
     model = Order
     context_object_name = 'order'
     template_name = 'order.html'
+

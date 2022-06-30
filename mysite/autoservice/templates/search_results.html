@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Search results{% endblock %}
+
+{% block content %}
+{% if vehicles %}
+<h1>Query "{{query}}" results:</h1>
+{% for vehicle in vehicles %}
+<a href="{% url 'vehicle' vehicle.id %}"><strong>License Plate: </strong> {{ vehicle.license_plate }}</li></a>
+    <strong>Owner: </strong> {{ vehicle.owner_name }}</li>
+    <strong>Model: </strong> {{ vehicle.vehicle_model.make }} {{ vehicle.vehicle_model.model }}</li>
+    <hr/>
+{% endfor %}
+{% else %}
+<h1>Query "{{query}}": no results</h1>
+{% endif %}
+{% endblock %}
