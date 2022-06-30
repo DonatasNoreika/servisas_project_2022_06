@@ -3,13 +3,32 @@
 {% block title %}Vehicles{% endblock %}
 
 {% block content %}
-<h1>Vehicles in Autoservice:</h1>
-{% for vehicle in vehicles %}
-<a href="{% url 'vehicle' vehicle.id %}"><strong>License Plate: </strong> {{ vehicle.license_plate }}</li></a>
-    <strong>Owner: </strong> {{ vehicle.owner_name }}</li>
-    <strong>Model: </strong> {{ vehicle.vehicle_model.make }} {{ vehicle.vehicle_model.model }}</li>
-    <hr/>
-{% endfor %}
+ {% load static %}
+    <h1>Vehicles</h1></br>
+    {% if vehicles %}
+    <div class="row">
+      {% for vehicle in vehicles %}
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm">
+            {% if vehicle.photo %}
+              <img src="{{ vehicle.photo.url }}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{ vehicle.owner_name }}</h6>
+              <p class="card-text"><a href="{% url 'vehicle' vehicle.id %}">{{ vehicle.vehicle_model.make }} {{ vehicle.vehicle_model.model }}</a></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p>No vehicles</p>
+    {% endif %}
+
+
+
 <div class="container puslapiai">
     <nav aria-label="...">
         {% if vehicles.has_other_pages %}

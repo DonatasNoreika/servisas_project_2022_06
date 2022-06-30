@@ -23,6 +23,7 @@ class Vehicle(models.Model):
     license_plate = models.CharField(verbose_name='License Plate', max_length=200)
     vin_code = models.CharField(verbose_name='VIN code', max_length=20)
     engine = models.CharField(verbose_name='Engine', max_length=200, null=True, blank=True)
+    photo = models.ImageField('Photo', upload_to='photos', null=True, blank=True)
 
     def __str__(self):
         return f"{self.owner_name}: {self.vehicle_model}, {self.year}, {self.engine}, {self.license_plate}, {self.vin_code}"
