@@ -27,9 +27,11 @@ class Vehicle(models.Model):
     def __str__(self):
         return f"{self.owner_name}: {self.vehicle_model}, {self.year}, {self.engine}, {self.license_plate}, {self.vin_code}"
 
+
     class Meta:
         verbose_name = 'Vehicle'
         verbose_name_plural = 'Vehicles'
+        ordering = ['license_plate']
 
 class Service(models.Model):
     name = models.CharField(verbose_name="Name", max_length=200)
