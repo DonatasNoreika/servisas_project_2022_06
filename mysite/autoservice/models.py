@@ -51,6 +51,14 @@ class Order(models.Model):
     due_date = models.DateTimeField(verbose_name="Due Date", null=True, blank=True)
     tsum = models.FloatField(verbose_name="TOTAL")
 
+    @property
+    def total(self):
+        lines = OrderLine.objects.filter(order=self.id)
+        total = 0
+        for line in lines:
+            total += line.service.price * line.qty
+        return total
+
     ORDER_STATUS = (
         ('a', 'Accepted'),
         ('i', 'In Progress'),
@@ -75,6 +83,10 @@ class OrderLine(models.Model):
     order = models.ForeignKey(to="Order", on_delete=models.CASCADE, null=True, related_name='lines')
     service = models.ForeignKey(to="Service", on_delete=models.SET_NULL, null=True)
     qty = models.IntegerField(verbose_name="Quantity")
+
+    @property
+    def line_sum(self):
+        return self.service.price * self.qty
 
     class Meta:
         verbose_name = 'Order line'

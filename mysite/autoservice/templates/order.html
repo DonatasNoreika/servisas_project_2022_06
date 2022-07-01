@@ -7,11 +7,12 @@
 <ul>
     <li><strong>Vehicle: </strong> {{ order.vehicle.license_plate }} ({{ order.vehicle.vehicle_model.make }} {{ order.vehicle.vehicle_model.model }}) </li>
     <li><strong>Deadline: </strong> {{ order.due_date }}</li>
-    <li><strong>Total: </strong> {{ order.tsum }} </li>
     <li><strong>Status: </strong> {{ order.get_status_display }}</li>
 </ul>
 {% for line in order.lines.all %}
 <hr/>
-<p><strong>Service: </strong>{{ line.service.name }} <strong>Price: </strong>{{ line.service.price }} <strong>Quantity: </strong>{{ line.qty }}</p>
+<p><strong>Service: </strong>{{ line.service.name }} <strong>Price: </strong>{{ line.service.price }} <strong>Quantity: </strong>{{ line.qty }} <strong>SUM: </strong>{{ line.line_sum }}</p>
 {% endfor %}
+<hr/>
+<h3><strong>Total: </strong> {{ order.total }}</h3>
 {% endblock %}
